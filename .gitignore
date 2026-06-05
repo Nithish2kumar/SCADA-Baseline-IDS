@@ -3,5 +3,5 @@ __pycache__/
 alerts.log
 *.swp
 .vscode/
-test.pcap
+*.pcap
 
