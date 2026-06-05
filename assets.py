@@ -9,15 +9,22 @@ def discovering(pkt):
         sport=pkt[TCP].sport
         dport=pkt[TCP].dport
 
-        if sport==502:
-            assets[src_ip]="PLC"
-            assets[dst_ip]="HMI"
-        elif dport==502:
-            assets[dst_ip]="PLC"
-            assets[src_ip]="HMI"
+        if sport == 502:
+            if src_ip not in assets:
+                assets[src_ip] = "PLC"
+            if dst_ip not in assets:
+                assets[dst_ip] = "HMI"
+
+        elif dport == 502:
+            if dst_ip not in assets:
+                assets[dst_ip] = "PLC"
+            if src_ip not in assets:
+                assets[src_ip] = "HMI"
+
 
 
 def printAssest():
     print("\n-----Assest Info-----")
     for ip,role in assets.items():
         print(f"{ip}-->{role}")
+

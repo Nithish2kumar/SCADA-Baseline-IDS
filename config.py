@@ -1,3 +1,4 @@
 knownDevice=[
-    "127.0.0.1"#for now I just testing with my localhost
+    "192.168.1.2",
+    "192.168.1.7"
 ]
