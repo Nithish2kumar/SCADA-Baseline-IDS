@@ -76,48 +76,39 @@ Alert System
 
 ---
 
-## 🚧 Current Progress
+### 🚧 Current Progress
 
-### ✅ Phase 1
+#### ✅ Phase 1 - PCAP Processing
 
 * [x] PCAP Loading
 * [x] Packet Summary Analysis
 
-### 🔄 Phase 2
+#### ✅ Phase 2 - Asset Discovery
 
 * [x] Asset Discovery Engine
-* [ ] PLC/HMI Identification
+* [x] PLC Identification
+* [x] HMI Identification
+* [x] Asset Inventory Generation
 
-### 🎯 Phase 3
+#### 🚧 Phase 3 - Modbus Analysis
 
-* [ ] Unauthorized PLC Access Detection
+* [ ] Modbus Function Parser
+* [ ] Function Code Identification
+* [ ] Read/Write Operation Detection
+
+#### 🚧 Phase 4 - Detection Engine
+
+* [x] Unknown Device Detection
 * [ ] Dangerous Modbus Write Detection
-
-### 🛠️ Phase 4
-
 * [ ] Register Scan Detection
+
+#### 📈 Future Work
+
 * [ ] Event Logging
-
-### 🧠 Phase 5
-
-* [ ] Baseline Learning Engine
-* [ ] Anomaly Detection
-
-### 📈 Phase 6
-
+* [ ] Baseline Learning
 * [ ] Dashboard
-* [ ] Reporting System
-
+* [ ] Real-Time Monitoring
 ---
-
-## 💻 Technologies Used
-
-* 🐍 Python
-* 📡 Scapy
-* ⚙️ Modbus TCP
-* 📂 PCAP Analysis
----
-
 ## ⚡ Installation
 
 ```bash
