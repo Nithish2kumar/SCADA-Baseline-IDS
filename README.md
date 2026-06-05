@@ -1,30 +1,198 @@
-# SCADA Baseline IDS
+# 🛡️ SCADA Baseline IDS
 
-A Python-based SCADA Intrusion Detection System (IDS) designed to analyze Modbus TCP traffic from PCAP files.
+> 🚀 A Python-based SCADA Intrusion Detection System (IDS) for Modbus TCP traffic analysis, asset discovery, anomaly detection, and industrial network monitoring.
 
-## Features
+![Status](https://img.shields.io/badge/Status-Active%20Development-blue)
+![Python](https://img.shields.io/badge/Python-3.x-yellow)
+![SCADA](https://img.shields.io/badge/SCADA-Security-red)
+![License](https://img.shields.io/badge/License-MIT-green)
 
-- Asset Discovery
-- Modbus Traffic Analysis
-- PLC/HMI Identification
-- Detection Rule Engine
-- Event Logging
+---
 
-## Technologies
+## 📖 Overview
 
-- Python
-- Scapy
-- Modbus TCP
-- PCAP Analysis
+SCADA Baseline IDS is a cybersecurity project focused on Industrial Control Systems (ICS) and SCADA environments.
 
-## Project Status
+The project analyzes Modbus TCP traffic from PCAP files, automatically discovers industrial assets, builds communication baselines, and detects suspicious activities that may indicate unauthorized access or industrial attacks.
 
-Currently under development.
+### 🎯 Learning Areas
 
-## Future Features
+* 🌐 Network Security
+* 🏭 Industrial Cybersecurity
+* ⚙️ SCADA Security
+* 📡 Modbus TCP Analysis
+* 🚨 Intrusion Detection Systems
+* 🐍 Python Security Tools
 
-- Unknown Device Detection
-- Dangerous Write Detection
-- Register Scanning Detection
-- Baseline Learning
-- GUI Dashboard
+---
+
+## ✨ Features
+
+### 🔍 Asset Discovery
+
+* Discover PLCs, HMIs, and Modbus devices
+* Build asset inventory automatically
+* Identify unknown devices
+
+### 📊 Modbus Traffic Analysis
+
+* Analyze Modbus TCP packets
+* Extract Function Codes
+* Monitor industrial communication patterns
+
+### 🚨 Detection Engine
+
+* Unauthorized PLC Access Detection
+* Dangerous Modbus Write Detection
+* Register Scanning Detection
+* Abnormal Communication Detection
+
+### 📋 Logging & Alerts
+
+* INFO Alerts
+* WARNING Alerts
+* CRITICAL Alerts
+* Event Logging
+
+---
+
+## 🏗️ Architecture
+
+```text
+PCAP File
+    ↓
+Packet Capture
+    ↓
+Protocol Parser
+    ↓
+Asset Discovery
+    ↓
+Baseline Engine
+    ↓
+Detection Engine
+    ↓
+Alert System
+```
+
+---
+
+## 🚧 Current Progress
+
+### ✅ Phase 1
+
+* [x] PCAP Loading
+* [x] Packet Summary Analysis
+
+### 🔄 Phase 2
+
+* [x] Asset Discovery Engine
+* [ ] PLC/HMI Identification
+
+### 🎯 Phase 3
+
+* [ ] Unauthorized PLC Access Detection
+* [ ] Dangerous Modbus Write Detection
+
+### 🛠️ Phase 4
+
+* [ ] Register Scan Detection
+* [ ] Event Logging
+
+### 🧠 Phase 5
+
+* [ ] Baseline Learning Engine
+* [ ] Anomaly Detection
+
+### 📈 Phase 6
+
+* [ ] Dashboard
+* [ ] Reporting System
+
+---
+
+## 💻 Technologies Used
+
+* 🐍 Python
+* 📡 Scapy
+* ⚙️ Modbus TCP
+* 📂 PCAP Analysis
+---
+
+## ⚡ Installation
+
+```bash
+git clone https://github.com/Nithish2kumar/SCADA-Baseline-IDS.git
+
+cd SCADA-Baseline-IDS
+
+pip install -r requirements.txt
+```
+
+---
+
+## ▶️ Running the Project
+
+```bash
+python main.py
+```
+
+---
+
+## 🎯 Detection Goals
+
+The IDS aims to detect:
+
+* 🚨 Unauthorized Device Access
+* 🖥️ Unknown Asset Discovery
+* ✍️ Modbus Write Operations
+* 🔎 Register Scanning Attempts
+* 📡 Abnormal Industrial Traffic
+* 📉 Baseline Deviations
+
+---
+
+## 📚 Learning Objectives
+
+* 🏭 SCADA Security
+* ⚙️ Industrial Control Systems
+* 📡 Modbus Protocol
+* 📦 Packet Analysis
+* 🌐 Network Monitoring
+* 🚨 Intrusion Detection Systems
+* 🛡️ Industrial Threat Detection
+
+---
+
+## 🚀 Future Enhancements
+
+* 📡 Live Traffic Monitoring
+* 🎨 Pyside Dashboard
+* 🔔 Real-Time Alerts
+* 📊 Threat Scoring System
+* 🕒 Attack Timeline Visualization
+* 🔗 Multi-Protocol Support
+* 📈 Historical Analysis
+
+---
+
+## 👨‍💻 Author
+
+**Nithish Kumar (NK)**
+
+Cybersecurity & Blockchain Technology Student
+
+### 🔥 Interests
+
+* 🛡️ Intrusion Detection Systems
+* 🏭 Industrial Cybersecurity
+* ⚙️ SCADA Security
+* 🌐 Network Security
+* 🐍 Python Security Tools
+
+---
+
+## ⚠️ Disclaimer
+
+This project is developed strictly for educational, research, and defensive cybersecurity purposes.
+
+Do not use any part of this project against systems without proper authorization.
