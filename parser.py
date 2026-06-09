@@ -21,14 +21,15 @@ def parse(pkt):
                     funcCode=paylod[7]
                     if funcCode>=128:
                         actual_fc = funcCode-128
-                        print(f"Exception response: {actual_fc}")
+                        name1=modbus_func.get(actual_fc,"Unknown")                        
+                        print(f"Exception response: {name1}")
                     else:
                         name=modbus_func.get(funcCode,"Unknown")
                         if funcCode in READ_CODES:
                             print(f"[READ] {name}")
 
                         elif funcCode in WRITE_CODES:
-                            print(f"[WRITE] {name}")
+                            print(f"⚠️  ALERT: Modbus Write Occurs ({name}) from {pkt[IP].src}")
 
                         else:
                             print(f"[UNKNOWN] FC={funcCode}")
