@@ -98,8 +98,8 @@ Alert System
 
 #### 🚧 Phase 4 - Detection Engine
 
-* [ ] Unknown Device Detection
-* [ ] Dangerous Modbus Write Detection
+* [x] Unknown Device Detection
+* [x] Dangerous Modbus Write Detection
 * [ ] Register Scan Detection
 
 #### 📈 Future Work
