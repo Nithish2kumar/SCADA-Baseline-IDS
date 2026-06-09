@@ -92,9 +92,9 @@ Alert System
 
 #### 🚧 Phase 3 - Modbus Analysis
 
-* [ ] Modbus Function Parser
-* [ ] Function Code Identification
-* [ ] Read/Write Operation Detection
+* [x] Modbus Function Parser
+* [x] Function Code Identification
+* [x] Read/Write Operation Detection
 
 #### 🚧 Phase 4 - Detection Engine
 
