@@ -90,17 +90,17 @@ Alert System
 * [x] HMI Identification
 * [x] Asset Inventory Generation
 
-#### 🚧 Phase 3 - Modbus Analysis
+#### ✅ Phase 3 - Modbus Analysis
 
 * [x] Modbus Function Parser
 * [x] Function Code Identification
 * [x] Read/Write Operation Detection
 
-#### 🚧 Phase 4 - Detection Engine
+#### ✅ Phase 4 - Detection Engine
 
 * [x] Unknown Device Detection
 * [x] Dangerous Modbus Write Detection
-* [ ] Register Scan Detection
+* [x] Register Scan Detection
 
 #### 📈 Future Work
 
