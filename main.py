@@ -1,14 +1,16 @@
 from scapy.all import *
-from assets import *
-from detector import detect
-from parser import parse
 
-packets = rdpcap("test.pcap")
+from assets import *
+from detector import *
+from parser import *
+
+packets = rdpcap("reg.pcap")
 
 for pkt in packets:
     discovering(pkt)
     detect(pkt)
-    parse(pkt)
+    register = parse(pkt)
+    if register is not None:
+        detectRegisterScan(pkt[IP].src,register)
 
 printAssest()
-
