@@ -103,7 +103,8 @@ Alert System
 * [x] Register Scan Detection
 
 #### 📈 Future Work
-
+* [x] Timing and frequency profiling
+* [ ] Risk Scoring
 * [ ] Event Logging
 * [ ] Baseline Learning
 * [ ] Dashboard
