@@ -38,5 +38,6 @@ def parse(pkt):
                             print(f"⚠️ ALERT: Modbus Write Occurs ({name}) from {pkt[IP].src}")
                         else:
                             print(f"[UNKNOWN] FC={funcCode}")
-                    return register
-    return None
+                    
+                    return funcCode, register
+    return None, None
