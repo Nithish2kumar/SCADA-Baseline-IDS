@@ -32,7 +32,7 @@ def timingCheck(pkt):
             if len(polling_baseline[key])>=5:
                 avg = sum(polling_baseline[key])/len(polling_baseline[key])
 
-                if TimeDiff<avg*0.5:
+                if TimeDiff<4:
                     print(f"⚠️ ALERT: High Frequency Polling from {src_ip}")
 
                 elif TimeDiff>avg*2:

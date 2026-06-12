@@ -3,8 +3,8 @@ from timing import timingCheck
 from assets import *
 from detector import *
 from parser import *
-
-packets = rdpcap("modbus_only.pcap")
+from risk import *
+packets = rdpcap("risk.pcap")
 
 for pkt in packets:
 
@@ -14,10 +14,9 @@ for pkt in packets:
     discovering(pkt)
     detect(pkt)
 
-    register = parse(pkt)
-
-    if register is not None:
-        detectRegisterScan(pkt[IP].src, register)
+    funcCode, register = parse(pkt)
+    alerting(pkt[IP].src, funcCode, register)
+    
 
     timingCheck(pkt)
 printAssest()
