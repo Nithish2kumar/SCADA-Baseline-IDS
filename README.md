@@ -104,7 +104,7 @@ Alert System
 
 #### 📈 Future Work
 * [x] Timing and frequency profiling
-* [ ] Risk Scoring
+* [x] Risk Scoring
 * [ ] Event Logging
 * [ ] Baseline Learning
 * [ ] Dashboard
