@@ -108,7 +108,7 @@ Alert System
 * [ ] Event Logging
 * [ ] Baseline Learning
 * [ ] Dashboard
-* [ ] Real-Time Monitoring
+* [x] Real-Time Monitoring
 ---
 ## ⚡ Installation
 
