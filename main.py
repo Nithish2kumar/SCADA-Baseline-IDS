@@ -4,19 +4,25 @@ from assets import *
 from detector import *
 from parser import *
 from risk import *
-packets = rdpcap("risk.pcap")
 
-for pkt in packets:
+def process_packet(pkt):
 
     if IP not in pkt:
-        continue
+        return
 
     discovering(pkt)
     detect(pkt)
 
     funcCode, register = parse(pkt)
     alerting(pkt[IP].src, funcCode, register)
-    
 
     timingCheck(pkt)
-printAssest()
+
+print("SCADA IDS Started...")
+print("Monitoring Modbus Traffic...")
+
+sniff(
+    iface="lo",
+    prn=process_packet,
+    store=False
+)
