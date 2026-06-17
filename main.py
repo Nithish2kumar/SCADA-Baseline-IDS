@@ -22,7 +22,11 @@ print("SCADA IDS Started...")
 print("Monitoring Modbus Traffic...")
 
 sniff(
+<<<<<<< HEAD
     iface="wlo1",
+=======
+    iface="lo",#You can give your interface like wlan, ethernet.
+>>>>>>> 9c99bd83edb1bc41d9b9b1a57c79508ab2357156
     prn=process_packet,
     store=False
 )
