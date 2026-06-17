@@ -2,6 +2,7 @@ from scapy.all import *
 from collections import defaultdict
 from parser import parse
 from alert import print_alert
+from logger import log_event
 import time
 
 
@@ -29,6 +30,13 @@ def timingCheck(pkt):
                 avg = sum(polling_baseline[key])/len(polling_baseline[key])
 
                 if TimeDiff<4:
+                    log_event(
+                    event_type="HIGH_POLLING",
+                    severity="MEDIUM",
+                    source=src_ip,
+                    details=f"Interval={TimeDiff:.2f}"
+                    )
+
                     print_alert(
                         alert_type="High Frequency Polling",
 
