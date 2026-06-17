@@ -22,7 +22,7 @@ print("SCADA IDS Started...")
 print("Monitoring Modbus Traffic...")
 
 sniff(
-    iface="lo",
+    iface="wlo1",
     prn=process_packet,
     store=False
 )

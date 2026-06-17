@@ -22,6 +22,53 @@ RISK_SCORE = {
     16: 10
 }
 
+MITIGATION = {
+    1: [
+        "Verify if read request is expected.",
+        "Monitor source device activity."
+    ],
+
+    2: [
+        "Verify if read request is expected.",
+        "Monitor source device activity."
+    ],
+
+    3: [
+        "Check if register access is authorized.",
+        "Review operator activity."
+    ],
+
+    4: [
+        "Verify device configuration.",
+        "Monitor for abnormal polling."
+    ],
+
+    5: [
+        "Verify coil state change.",
+        "Check operator authorization.",
+        "Inspect PLC outputs."
+    ],
+
+    6: [
+        "Validate register modification.",
+        "Review HMI commands.",
+        "Restore expected value if needed."
+    ],
+
+    15: [
+        "Check bulk coil modifications.",
+        "Inspect process impact.",
+        "Verify source device."
+    ],
+
+    16: [
+        "Investigate immediately.",
+        "Check PLC process state.",
+        "Review operator logs.",
+        "Consider isolating source device."
+    ]
+}
+
 def risky(score):
     if score>=10:
         return "CRITICAL"
@@ -50,4 +97,8 @@ def alerting(src_ip, funcCode, addr):
     print(f"Address     : {addr}")
     print(f"Risk Score  : {score}")
     print(f"Risk level  : {level}")
+    print("\nRecommended Actions:")
+
+    for action in MITIGATION.get(funcCode, ["Investigate manually."]):
+        print(f" - {action}")
     print("==============================\n")
