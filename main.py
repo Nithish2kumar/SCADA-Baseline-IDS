@@ -13,16 +13,39 @@ def process_packet(pkt):
     discovering(pkt)
     detect(pkt)
 
-    funcCode, register = parse(pkt)
+    funcCode, register=parse(pkt)
     alerting(pkt[IP].src, funcCode, register)
 
     timingCheck(pkt)
 
-print("SCADA IDS Started...")
-print("Monitoring Modbus Traffic...")
 
-sniff(
-    iface="wlo1",
-    prn=process_packet,
-    store=False
-)
+choice=int(input(
+    "Enter your choice:\n"
+    "1. Live Monitoring\n"
+    "2. Analyze PCAP File\n"
+))
+
+if choice==1:
+
+    print("SCADA IDS Started...")
+    print("Monitoring Modbus Traffic...")
+
+    sniff(
+        iface="wlo1",
+        prn=process_packet,
+        store=False
+    )
+
+elif choice==2:
+
+    filename=input("Enter pcap file name: ")
+
+    packets=rdpcap(filename)
+
+    print(f"Loaded {len(packets)} packets")
+
+    for pkt in packets:
+        process_packet(pkt)
+
+else:
+    print("Invalid Choice")
