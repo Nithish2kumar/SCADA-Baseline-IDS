@@ -4,6 +4,13 @@ from assets import *
 from detector import *
 from parser import *
 from risk import *
+from verification import verify
+
+if not verify():
+    print("⚠️ CONFIGURATION TAMPERING DETECTED")
+    exit()
+
+print("✅ Configuration Verified")
 
 def process_packet(pkt):
 

@@ -5,4 +5,4 @@ alerts.log
 .vscode/
 *.pcap
 *.log
-
+*.hash

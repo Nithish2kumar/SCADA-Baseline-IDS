@@ -1,8 +1,13 @@
 from scapy.all import *
-from config import knownDevice
 from logger import log_event
 register_history = {}
 
+import json
+
+with open("config.json", "r") as f:
+    config = json.load(f)
+
+knownDevices = config["KnownDevices"]
 
 def detect(pkt):
     
@@ -12,7 +17,7 @@ def detect(pkt):
         if TCP in pkt:
             dport=pkt[TCP].dport
             if dport==502:
-                if src_ip not in knownDevice:
+                if src_ip not in knownDevices:
 
                     log_event(
                         event_type="UNKNOWN_DEVICE",
