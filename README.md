@@ -126,7 +126,7 @@ pip install -r requirements.txt
 ## ▶️ Running the Project
 
 ```bash
-python main.py
+sudo python3 main.py #Run the main file with privileged to capture the live traffic
 ```
 
 ---
