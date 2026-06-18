@@ -105,7 +105,8 @@ Alert System
 #### 📈 Future Work
 * [x] Timing and frequency profiling
 * [x] Risk Scoring
-* [ ] Event Logging
+* [x] Event Logging
+* [x] Enhanced security for config file 
 * [ ] Baseline Learning
 * [ ] Dashboard
 * [x] Real-Time Monitoring
