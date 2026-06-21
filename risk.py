@@ -1,4 +1,5 @@
 from scapy.all import *
+from session import add_alert
 from logger import log_event
 MODBUS_FUNCTIONS = {
     1: "Read Coils",
@@ -86,6 +87,7 @@ def alerting(src_ip, funcCode, addr):
         return
     
     
+    
     funcName=MODBUS_FUNCTIONS.get(funcCode,"Unknown Function")
     score=RISK_SCORE.get(funcCode,1)
     level=risky(score)
@@ -95,6 +97,13 @@ def alerting(src_ip, funcCode, addr):
     source=src_ip,
     details=f"Address={addr}"
     )
+    add_alert({
+    "event": funcName,
+    "severity": level,
+    "source": src_ip,
+    "details": f"Address={addr}",
+    "score": score
+    })
     print("\n==============================")
     print("SCADA IDS ALERT")
     print("==============================")

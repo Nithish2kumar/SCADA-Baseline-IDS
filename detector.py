@@ -1,4 +1,6 @@
 from scapy.all import *
+from session import add_alert
+
 from logger import log_event
 register_history = {}
 
@@ -31,3 +33,9 @@ def detect(pkt):
                     print(" - Check switch/router logs")
                     print(" - Block device if unauthorized")
                     print(" - Investigate possible rogue host")
+                    add_alert({
+                        "event": "UNKNOWN_DEVICE",
+                        "severity": "HIGH",
+                        "source": src_ip,
+                        "details": "Attempting Modbus access"
+                    })

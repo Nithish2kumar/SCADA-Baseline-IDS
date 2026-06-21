@@ -1,6 +1,7 @@
 from scapy.all import *
 from collections import defaultdict
 from parser import parse
+from session import add_alert
 from alert import print_alert
 from logger import log_event
 import time
@@ -36,6 +37,12 @@ def timingCheck(pkt):
                     source=src_ip,
                     details=f"Interval={TimeDiff:.2f}"
                     )
+                    add_alert({
+                        "event": "HIGH_POLLING",
+                        "severity": "MEDIUM",
+                        "source": src_ip,
+                        "details": f"Interval={TimeDiff:.2f}"
+                    })
 
                     print_alert(
                         alert_type="High Frequency Polling",

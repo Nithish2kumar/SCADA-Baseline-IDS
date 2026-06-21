@@ -107,6 +107,7 @@ Alert System
 * [x] Risk Scoring
 * [x] Event Logging
 * [x] Enhanced security for config file 
+* [x] Report generation
 * [ ] Baseline Learning
 * [ ] Dashboard
 * [x] Real-Time Monitoring

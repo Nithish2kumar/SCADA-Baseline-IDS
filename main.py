@@ -3,6 +3,8 @@ from timing import timingCheck
 from assets import *
 from detector import *
 from parser import *
+from report import generate_report
+from session import get_alerts
 from risk import *
 from verification import verify
 
@@ -53,6 +55,11 @@ elif choice==2:
 
     for pkt in packets:
         process_packet(pkt)
+    
+    generate_report(
+    get_alerts(),
+    filename
+    )
 
 else:
     print("Invalid Choice")
