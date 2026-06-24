@@ -6,3 +6,4 @@ alerts.log
 *.pcap
 *.log
 *.hash
+*.pdf

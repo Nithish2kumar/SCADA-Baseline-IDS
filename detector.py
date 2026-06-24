@@ -1,6 +1,6 @@
 from scapy.all import *
 from session import add_alert
-
+from blockip import blockIP
 from logger import log_event
 register_history = {}
 
@@ -20,6 +20,7 @@ def detect(pkt):
             dport=pkt[TCP].dport
             if dport==502:
                 if src_ip not in knownDevices:
+                    blockIP(src_ip)
 
                     log_event(
                         event_type="UNKNOWN_DEVICE",
