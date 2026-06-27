@@ -102,6 +102,12 @@ Alert System
 * [x] Dangerous Modbus Write Detection
 * [x] Register Scan Detection
 
+#### 🚧 Phase 5 - LSTM Autoencoder
+
+* [x] Simulation (For time-series data)
+* [x] Pandas loading
+* [x] Normalization and Sequence Generation
+
 #### 📈 Future Work
 * [x] Timing and frequency profiling
 * [x] Risk Scoring
