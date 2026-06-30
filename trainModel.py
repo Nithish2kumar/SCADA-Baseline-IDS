@@ -45,6 +45,8 @@ criterion=nn.MSELoss()
 optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
 recon=model(xTensor)
 loss=criterion(recon,xTensor)
+
+#Training the model (Adjusting the weight to get closest input value)
 epochs=50
 for epoch in range(epochs):
     optimizer.zero_grad()
@@ -53,3 +55,9 @@ for epoch in range(epochs):
     loss.backward()
     optimizer.step()
     print(f"Epoch {epoch+1}: {loss.item():.6f}")
+
+#Calculating error
+recon=model(xTensor)
+errors=torch.mean((recon-xTensor)**2, dim=(1,2))
+print("Error shape: ",errors.shape)
+print("First 10 errors: ",errors[:10])
