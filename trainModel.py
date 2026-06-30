@@ -41,5 +41,9 @@ class TestModel(nn.Module):
         return reconstructed
     
 model=TestModel()
+criterion=nn.MSELoss()
+optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
 recon=model(xTensor)
+loss=criterion(recon,xTensor)
+print(loss)
 print(recon.shape)
