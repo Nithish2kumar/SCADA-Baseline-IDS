@@ -1,7 +1,12 @@
 #Fetch data
 import pandas as pd
-df=pd.read_csv("data/sensor_data.csv")
-df=df.drop("timestamp", axis=1)
+df=pd.read_csv("data/normal.csv")
+df.columns=df.columns.str.strip()
+
+# Remove unwanted columns
+df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
+df=df.iloc[:100000]
+print(df.shape)
 
 #Normalizing
 from sklearn.preprocessing import MinMaxScaler
@@ -10,7 +15,7 @@ scaled_data=scaler.fit_transform(df)
 
 #Sampling the data
 import numpy as np
-windowSize=10
+windowSize=20
 def createSeq(data,window):
     sequences=[]
     for i in range(len(data)-window):
@@ -19,23 +24,25 @@ def createSeq(data,window):
     return np.array(sequences)
 
 x=createSeq(scaled_data,windowSize)
+print(x.shape)
 
 #LSTM
 import torch
 import torch.nn as nn
 xTensor=torch.tensor(x,dtype=torch.float32)
+print(xTensor.shape)
 
 class TestModel(nn.Module):
     def __init__(self):
         super().__init__()
-        self.encoder=nn.LSTM(input_size=6,hidden_size=64,batch_first=True)
+        self.encoder=nn.LSTM(input_size=44,hidden_size=64,batch_first=True)
         self.decoder=nn.LSTM(input_size=64,hidden_size=64,batch_first=True)
-        self.output_layer=nn.Linear(64,6)
+        self.output_layer=nn.Linear(64,44)
     def forward(self, x):
         _,(hidden,cell)=self.encoder(x)
         hidden=hidden.squeeze(0)
         decoderInput=hidden.unsqueeze(1)
-        decoderInput=decoderInput.repeat(1,10,1)
+        decoderInput=decoderInput.repeat(1,windowSize,1)
         decoderOutput,_=self.decoder(decoderInput)
         reconstructed=self.output_layer(decoderOutput)
         return reconstructed
@@ -43,9 +50,6 @@ class TestModel(nn.Module):
 model=TestModel()
 criterion=nn.MSELoss()
 optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
-recon=model(xTensor)
-loss=criterion(recon,xTensor)
-
 #Training the model (Adjusting the weight to get closest input value)
 epochs=50
 for epoch in range(epochs):
@@ -59,5 +63,4 @@ for epoch in range(epochs):
 #Calculating error
 recon=model(xTensor)
 errors=torch.mean((recon-xTensor)**2, dim=(1,2))
-print("Error shape: ",errors.shape)
 print("First 10 errors: ",errors[:10])
