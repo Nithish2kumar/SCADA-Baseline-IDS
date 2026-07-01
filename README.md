@@ -104,7 +104,7 @@ Alert System
 
 #### 🚧 Phase 5 - LSTM Autoencoder
 
- Dataset Loading
+* [x] Dataset Loading
 * [x] Data Normalization
 * [x] Sequence Generation
 * [x] Tensor Conversion
