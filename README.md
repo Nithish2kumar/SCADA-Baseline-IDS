@@ -104,9 +104,18 @@ Alert System
 
 #### 🚧 Phase 5 - LSTM Autoencoder
 
-* [x] Simulation (For time-series data)
-* [x] Pandas loading
-* [x] Normalization and Sequence Generation
+ Dataset Loading
+* [x] Data Normalization
+* [x] Sequence Generation
+* [x] Tensor Conversion
+* [x] LSTM Autoencoder Implementation
+* [x] Model Training
+* [ ] Reconstruction Error Analysis
+* [ ] Threshold Selection
+* [ ] Real-time Anomaly Detection
+* [ ] Alert Generation
+* [ ] Model Evaluation
+* [ ] Integration with IDS
 
 #### 📈 Future Work
 * [x] Timing and frequency profiling
