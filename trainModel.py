@@ -30,6 +30,8 @@ print(x.shape)
 import torch
 import torch.nn as nn
 xTensor=torch.tensor(x,dtype=torch.float32)
+device=torch.device("cuda" if torch.cuda.is_available() else "cpu")
+xTensor=xTensor.to(device)
 print(xTensor.shape)
 
 class TestModel(nn.Module):
@@ -46,12 +48,18 @@ class TestModel(nn.Module):
         decoderOutput,_=self.decoder(decoderInput)
         reconstructed=self.output_layer(decoderOutput)
         return reconstructed
-    
-model=TestModel()
+
+
+model=TestModel().to(device)
 criterion=nn.MSELoss()
 optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
+print(torch.cuda.is_available())
+print(torch.cuda.get_device_name(0))
+print(next(model.parameters()).device)
+print(xTensor.device)
+print(torch.cuda.memory_allocated() / 1024**2, "MB")
 #Training the model (Adjusting the weight to get closest input value)
-epochs=50
+epochs=20
 for epoch in range(epochs):
     optimizer.zero_grad()
     recon=model(xTensor)
@@ -63,4 +71,12 @@ for epoch in range(epochs):
 #Calculating error
 recon=model(xTensor)
 errors=torch.mean((recon-xTensor)**2, dim=(1,2))
-print("First 10 errors: ",errors[:10])
+meanError=errors.mean()
+stdError=errors.std()
+threshold=meanError+3*stdError
+print("Mean error: ",meanError.item())
+print("Std error: ",stdError.item())
+print("Threshold: ",threshold.item())
+anomalies=torch.where(errors>threshold)[0]
+print("No.of anomalies: ",len(anomalies))
+print("First anomalies: ",anomalies[:20])
