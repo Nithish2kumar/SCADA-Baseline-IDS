@@ -110,8 +110,8 @@ Alert System
 * [x] Tensor Conversion
 * [x] LSTM Autoencoder Implementation
 * [x] Model Training
-* [ ] Reconstruction Error Analysis
-* [ ] Threshold Selection
+* [x] Reconstruction Error Analysis
+* [x] Threshold Selection
 * [ ] Real-time Anomaly Detection
 * [ ] Alert Generation
 * [ ] Model Evaluation
