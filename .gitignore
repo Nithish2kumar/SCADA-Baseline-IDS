@@ -7,3 +7,4 @@ alerts.log
 *.log
 *.hash
 *.pdf
+data/

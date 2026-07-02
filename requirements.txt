@@ -1,2 +1,7 @@
 scapy
 reportlab
+pandas
+numpy
+scikit-learn
+torch
+joblib
