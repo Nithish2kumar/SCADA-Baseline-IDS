@@ -15,7 +15,7 @@ scaled_data=scaler.fit_transform(df)
 
 #Sampling the data
 import numpy as np
-windowSize=20
+windowSize=30
 def createSeq(data,window):
     sequences=[]
     for i in range(len(data)-window):
@@ -65,7 +65,7 @@ recon=model(xTensor)
 errors=torch.mean((recon-xTensor)**2, dim=(1,2))
 meanError=errors.mean()
 stdError=errors.std()
-threshold=meanError+3*stdError
+threshold=meanError+2*stdError
 print("Mean error: ",meanError.item())
 print("Std error: ",stdError.item())
 print("Threshold: ",threshold.item())

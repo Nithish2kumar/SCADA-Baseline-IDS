@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import torch
 import torch.nn as nn
-import joblib  
+import joblib
+from collections import deque
 
 class TestModel(nn.Module):
     def __init__(self):
@@ -18,39 +19,42 @@ class TestModel(nn.Module):
         decoderOutput,_=self.decoder(decoderInput)
         reconstructed=self.output_layer(decoderOutput)
         return reconstructed
-
-#sequencing    
-windowSize=20
-def createSeq(data,window):
-    sequences=[]
-    for i in range(len(data)-window):
-        sequences.append(data[i:i+window])
     
-    return np.array(sequences)
-
-
+windowSize=30
 model=TestModel()
 model.load_state_dict(torch.load("model.pth"))
 model.eval()
 threshold=torch.load("threshold.pth")
 scaler=joblib.load("scaler.pkl")
-print("Threshold: ", threshold.item())
+print("Threshold: ",threshold.item())
 
-#loading dataset
 df=pd.read_csv("data/attack.csv")
 df.columns=df.columns.str.strip()
-labels=df["Normal/Attack"]
 df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
-print(df.shape)
+print("Dataset Shape: ",df.shape)
 
 scalerData=scaler.transform(df)
-x=createSeq(scalerData,windowSize)
-xTensor=torch.tensor(x,dtype=torch.float32)
+buffer=deque(maxlen=windowSize)
 
-with torch.no_grad():
-    recon=model(xTensor)
-    errors=torch.mean((recon-xTensor)**2,dim=(1,2))
-    anomalies=torch.where(errors>threshold)[0]
-    print(type(anomalies))
-    print("Detected Anomalies: ",len(anomalies))
-    print("First anomalies: ", anomalies[:20])
+anomaly=[]
+for i,row in enumerate(scalerData):
+    buffer.append(row)
+    if len(buffer)<windowSize:
+        continue
+
+    x=np.array(buffer)
+    x=x.reshape(1,windowSize,44)
+    xTensor=torch.tensor(x,dtype=torch.float32)
+
+    with torch.no_grad():
+        recon=model(xTensor)
+        error=torch.mean((recon-xTensor)**2,dim=(1,2)).item()
+        if error>threshold.item():
+            anomaly.append(i)
+
+print("Anomaly summary:")
+print("Total anomalies: ",len(anomaly))
+if len(anomaly)>0:
+    print("First anomaly row: ",anomaly[0])
+    print("Last anomaly row: ",anomaly[-1])
+    
