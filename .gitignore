@@ -3,6 +3,7 @@ __pycache__/
 alerts.log
 *.swp
 .vscode/
+.idea/
 *.pcap
 *.log
 *.hash

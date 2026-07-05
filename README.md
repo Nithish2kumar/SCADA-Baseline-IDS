@@ -112,7 +112,7 @@ Alert System
 * [x] Model Training
 * [x] Reconstruction Error Analysis
 * [x] Threshold Selection
-* [ ] Real-time Anomaly Detection
+* [x] Real-time Anomaly Detection
 * [ ] Alert Generation
 * [ ] Model Evaluation
 * [ ] Integration with IDS
