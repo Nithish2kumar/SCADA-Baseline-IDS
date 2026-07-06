@@ -28,7 +28,7 @@ threshold=torch.load("threshold.pth")
 scaler=joblib.load("scaler.pkl")
 print("Threshold: ",threshold.item())
 
-df=pd.read_csv("data/attack.csv")
+df=pd.read_csv("../data/attack.csv")
 df.columns=df.columns.str.strip()
 df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
 print("Dataset Shape: ",df.shape)

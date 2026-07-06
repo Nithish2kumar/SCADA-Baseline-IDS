@@ -20,7 +20,7 @@ class TestModel(nn.Module):
         return reconstructed
 
 #sequencing    
-windowSize=20
+windowSize=30
 def createSeq(data,window):
     sequences=[]
     for i in range(len(data)-window):
@@ -37,7 +37,7 @@ scaler=joblib.load("scaler.pkl")
 print("Threshold: ", threshold.item())
 
 #loading dataset
-df=pd.read_csv("data/attack.csv")
+df=pd.read_csv("../data/attack.csv")
 df.columns=df.columns.str.strip()
 labels=df["Normal/Attack"]
 df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
@@ -51,6 +51,5 @@ with torch.no_grad():
     recon=model(xTensor)
     errors=torch.mean((recon-xTensor)**2,dim=(1,2))
     anomalies=torch.where(errors>threshold)[0]
-    print(type(anomalies))
     print("Detected Anomalies: ",len(anomalies))
-    print("First anomalies: ", anomalies[:20])
+    print("First 20 anomalies: ", anomalies[:20])
