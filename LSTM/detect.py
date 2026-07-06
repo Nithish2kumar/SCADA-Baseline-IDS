@@ -42,6 +42,7 @@ scaler=joblib.load("scaler.pkl")
 df=pd.read_csv("../data/attack.csv")
 df.columns=df.columns.str.strip()
 labels=df["Normal/Attack"]
+timestamp=df["Timestamp"]
 featureNames=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"]).columns.tolist()
 df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
 seq,fet=df.shape
@@ -60,7 +61,17 @@ with torch.no_grad():
     avgFeatureError=featureAnomaly.mean(dim=0)
     print("Detected Anomalies: ",len(anomalies))
     if len(anomalies)>0:
+        fs=anomalies[0].item()
+        ls=anomalies[-1].item()
+        start=fs
+        end=ls+windowSize-1
         top=torch.topk(avgFeatureError,5)
-        print("----Overall sensor's anomaly ranking----")
+        print("\n----Attack Timeline----")
+        print("Attack started row: ",start)
+        print("Attack ended row: ", end)
+        print("Start Time: ",timestamp.iloc[start])
+        print("End Time: ", timestamp.iloc[end])
+        print("\n----Overall sensor's anomaly ranking----")
+        print("Sensor\tReconstruction Error")
         for idx in top.indices:
             print(featureNames[idx],"->",avgFeatureError[idx].item())
