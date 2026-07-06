@@ -1,6 +1,6 @@
 #Fetch data
 import pandas as pd
-df=pd.read_csv("data/normal.csv")
+df=pd.read_csv("../data/normal.csv")
 df.columns=df.columns.str.strip()
 
 # Remove unwanted columns
@@ -31,6 +31,11 @@ import torch
 import torch.nn as nn
 xTensor=torch.tensor(x,dtype=torch.float32)
 print(xTensor.shape)
+#Creating dataloadeer
+from torch.utils.data import TensorDataset, DataLoader
+dataset=TensorDataset(xTensor)
+loader=DataLoader(dataset,batch_size=64,shuffle=True)
+
 
 class TestModel(nn.Module):
     def __init__(self):
@@ -53,12 +58,16 @@ optimizer=torch.optim.Adam(model.parameters(),lr=0.001)
 #Training the model (Adjusting the weight to get closest input value)
 epochs=50
 for epoch in range(epochs):
-    optimizer.zero_grad()
-    recon=model(xTensor)
-    loss=criterion(recon,xTensor)
-    loss.backward()
-    optimizer.step()
-    print(f"Epoch {epoch+1}: {loss.item():.6f}")
+    totalLoss=0
+    for (batch,) in loader:
+        optimizer.zero_grad()
+        recon=model(batch)
+        loss=criterion(recon,batch)
+        loss.backward()
+        optimizer.step()
+        totalLoss=totalLoss+loss.item()
+    avgLoss=totalLoss/len(loader)
+    print("Epoch: ",epoch+1,"Loss: ",avgLoss)
 
 #Calculating error
 recon=model(xTensor)
