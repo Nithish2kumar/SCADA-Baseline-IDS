@@ -52,6 +52,29 @@ scalerData=scaler.transform(df)
 x=createSeq(scalerData,windowSize)
 xTensor=torch.tensor(x,dtype=torch.float32)
 
+def attackSpecify(sensorName):
+    score={
+        "Flow Manipulation":0,
+        "Tank Level Manipulation": 0,
+        "Pressure Manipulation": 0,
+        "Valve Manipulation": 0,
+        "Pump Manipulation": 0,
+        "Unknown": 0,
+    }
+
+    for sensor in sensorName:
+        if sensor.startswith("FIT"):
+            score["Flow Manipulation"]+=1
+        elif sensor.startswith("LIT"):
+            score["Tank Level Manipulation"]+=1
+        elif sensor.startswith("PIT") or sensor.startswith("DPIT"):
+            score["Pressure Manipulation"]+=1
+        elif sensor.startswith("MV"):
+            score["Valve Manipulation"]+=1
+        elif sensor.startswith("P"):
+            score["Pump Manipulation"]+=1
+    return max(score,key=score.get)
+
 with torch.no_grad():
     recon=model(xTensor)
     featureErrors=torch.mean((recon-xTensor)**2,dim=1)
@@ -73,5 +96,12 @@ with torch.no_grad():
         print("End Time: ", timestamp.iloc[end])
         print("\n----Overall sensor's anomaly ranking----")
         print("Sensor\tReconstruction Error")
+        topSensor=[]
         for idx in top.indices:
+            sensor=featureNames[idx]
+            topSensor.append(sensor)
             print(featureNames[idx],"->",avgFeatureError[idx].item())
+
+        attack=attackSpecify(topSensor)
+        print("\n----Attack Classification----")
+        print("Likely Attack: ",attack)
