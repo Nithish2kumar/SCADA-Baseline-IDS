@@ -1,3 +1,5 @@
+from calendar import firstweekday
+
 import pandas as pd
 import numpy as np
 import torch
@@ -34,14 +36,16 @@ model.load_state_dict(torch.load("model.pth"))
 model.eval()
 threshold=torch.load("threshold.pth")
 scaler=joblib.load("scaler.pkl")
-print("Threshold: ", threshold.item())
+#print("Threshold: ", threshold.item())
 
 #loading dataset
 df=pd.read_csv("../data/attack.csv")
 df.columns=df.columns.str.strip()
 labels=df["Normal/Attack"]
+featureNames=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"]).columns.tolist()
 df=df.drop(columns=["Timestamp","Normal/Attack","MV101","AIT201","MV201","P201","P202","P204","MV303"])
-print(df.shape)
+seq,fet=df.shape
+print("Total sequences: ",seq,"and features: ",fet)
 
 scalerData=scaler.transform(df)
 x=createSeq(scalerData,windowSize)
@@ -49,7 +53,14 @@ xTensor=torch.tensor(x,dtype=torch.float32)
 
 with torch.no_grad():
     recon=model(xTensor)
+    featureErrors=torch.mean((recon-xTensor)**2,dim=1)
     errors=torch.mean((recon-xTensor)**2,dim=(1,2))
     anomalies=torch.where(errors>threshold)[0]
+    featureAnomaly=featureErrors[anomalies]
+    avgFeatureError=featureAnomaly.mean(dim=0)
     print("Detected Anomalies: ",len(anomalies))
-    print("First 20 anomalies: ", anomalies[:20])
+    if len(anomalies)>0:
+        top=torch.topk(avgFeatureError,5)
+        print("----Overall sensor's anomaly ranking----")
+        for idx in top.indices:
+            print(featureNames[idx],"->",avgFeatureError[idx].item())
