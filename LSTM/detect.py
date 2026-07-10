@@ -80,6 +80,18 @@ with torch.no_grad():
     featureErrors=torch.mean((recon-xTensor)**2,dim=1)
     errors=torch.mean((recon-xTensor)**2,dim=(1,2))
     anomalies=torch.where(errors>threshold)[0]
+    attackSeg=[]
+    strt=anomalies[0].item()
+    prv=anomalies[0].item()
+    for seq in anomalies[1:]:
+        curr=seq.item()
+        if curr <= prv+5:
+            prv=curr
+        else:
+            attackSeg.append((strt,prv))
+            strt=curr
+            prv=curr
+    attackSeg.append((strt,prv))
     featureAnomaly=featureErrors[anomalies]
     avgFeatureError=featureAnomaly.mean(dim=0)
     print("Detected Anomalies: ",len(anomalies))
@@ -105,3 +117,11 @@ with torch.no_grad():
         attack=attackSpecify(topSensor)
         print("\n----Attack Classification----")
         print("Likely Attack: ",attack)
+        print("\n----Attack Segments----")
+        for i ,(startSeg,endSeg) in enumerate(attackSeg,start=1):
+            endRow=endSeg+windowSize-1
+            print("Attack started row: ", startSeg)
+            print("Attack ended row: ", endSeg)
+            print("Start Time: ", timestamp.iloc[startSeg])
+            print("End Time: ", timestamp.iloc[endSeg])
+            print('\n')
