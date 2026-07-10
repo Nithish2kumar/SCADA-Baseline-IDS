@@ -96,16 +96,7 @@ with torch.no_grad():
     avgFeatureError=featureAnomaly.mean(dim=0)
     print("Detected Anomalies: ",len(anomalies))
     if len(anomalies)>0:
-        fs=anomalies[0].item()
-        ls=anomalies[-1].item()
-        start=fs
-        end=ls+windowSize-1
         top=torch.topk(avgFeatureError,5)
-        print("\n----Attack Timeline----")
-        print("Attack started row: ",start)
-        print("Attack ended row: ", end)
-        print("Start Time: ",timestamp.iloc[start])
-        print("End Time: ", timestamp.iloc[end])
         print("\n----Overall sensor's anomaly ranking----")
         print("Sensor\tReconstruction Error")
         topSensor=[]
@@ -120,8 +111,7 @@ with torch.no_grad():
         print("\n----Attack Segments----")
         for i ,(startSeg,endSeg) in enumerate(attackSeg,start=1):
             endRow=endSeg+windowSize-1
-            print("Attack started row: ", startSeg)
+            print("\nAttack started row: ", startSeg)
             print("Attack ended row: ", endSeg)
             print("Start Time: ", timestamp.iloc[startSeg])
             print("End Time: ", timestamp.iloc[endSeg])
-            print('\n')
