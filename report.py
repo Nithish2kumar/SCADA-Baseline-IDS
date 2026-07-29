@@ -10,10 +10,17 @@ from reportlab.lib.styles import getSampleStyleSheet
 
 def generate_report(alerts, pcap_name):
 
-    report_name = pcap_name.replace(
+    if pcap_name.endswith(".pcap"):
+        report_name = pcap_name.replace(
         ".pcap",
         "_report.pdf"
     )
+    elif pcap_name.endswith(".pcapng"):
+        report_name = pcap_name.replace(
+        ".pcapng",
+        "_report.pdf"
+    )
+
 
     pdf = SimpleDocTemplate(report_name)
 

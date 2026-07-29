@@ -8,4 +8,8 @@ alerts.log
 *.log
 *.hash
 *.pdf
+*.pcapng
 data/
+config.json
+config.hash
+events.log
