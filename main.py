@@ -9,6 +9,7 @@ from report import generate_report
 from session import get_alerts
 from risk import *
 from verification import verify
+from cli import CLIchoice
 
 if not verify():
     print("⚠️ CONFIGURATION TAMPERING DETECTED")
@@ -26,11 +27,7 @@ def process_packet(pkt):
     timingCheck(pkt)
 
 
-choice = int(input(
-    "Enter your choice:\n"
-    "1. Live Monitoring\n"
-    "2. Analyze PCAP File\n"
-))
+choice = CLIchoice()
 if choice == 1:
     print("SCADA IDS Started...")
     print("Monitoring Modbus Traffic...")
