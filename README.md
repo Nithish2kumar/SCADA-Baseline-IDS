@@ -73,7 +73,10 @@ Detection Engine
     ↓
 Alert System
 ```
+---
+### Output Screenshot
 
+![alt text](image.png)
 ---
 
 ### 🚧 Current Progress
