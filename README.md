@@ -142,7 +142,12 @@ pip install -r requirements.txt
 ## ▶️ Running the Project
 
 ```bash
+python3 hashing.py #Creating hash for config.json
+python3 verfication.py #Verify the hash
 sudo python3 main.py #Run the main file with privileged to capture the live traffic
+                (OR)
+sudo python3 hacker_cli.py #For more interactive terminal experience
+
 ```
 
 ---
