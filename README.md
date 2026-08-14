@@ -76,7 +76,8 @@ Alert System
 ---
 ### Output Screenshot
 
-![alt text](image.png)
+![Uploading Screenshot From 2026-08-15 00-38-19.png…]()
+
 ---
 
 ### 🚧 Current Progress
