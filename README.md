@@ -76,7 +76,8 @@ Alert System
 ---
 ### Output Screenshot
 
-![Uploading Screenshot From 2026-08-15 00-38-19.png…]()
+<img width="668" height="579" alt="Screenshot From 2026-08-15 00-38-19" src="https://github.com/user-attachments/assets/ef5d4457-937b-4e6d-ba3b-a78863c13cdb" />
+
 
 ---
 
