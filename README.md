@@ -124,7 +124,7 @@ Alert System
 * [x] Enhanced security for config file 
 * [x] Report generation
 * [ ] Baseline Learning
-* [ ] Dashboard
+* [x] CLI
 * [x] Real-Time Monitoring
 ---
 ## ⚡ Installation
@@ -142,8 +142,6 @@ pip install -r requirements.txt
 ## ▶️ Running the Project
 
 ```bash
-python3 hashing.py #After adding your trusted IPs in config.json file create a hash for validating
-python3 verification.py #To verify whether the config is tampered or no.
 sudo python3 main.py #Run the main file with privileged to capture the live traffic
 ```
 
@@ -177,7 +175,7 @@ The IDS aims to detect:
 ## 🚀 Future Enhancements
 
 * 📡 Live Traffic Monitoring
-* 🎨 GTK Dashboard
+* 🎨 Pyside Dashboard
 * 🔔 Real-Time Alerts
 * 📊 Threat Scoring System
 * 🕒 Attack Timeline Visualization

@@ -11,5 +11,7 @@ alerts.log
 *.pcapng
 data/
 config.json
+config.py
 config.hash
 events.log
+protocols/
